@@ -2,10 +2,9 @@ name: build-image
 on: [push]
 
 env:
-  # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
-  # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
+  OPENWRT_ROOTFS_URL: https://archive.openwrt.org/releases/19.07.10/targets/x86/64/openwrt-19.07.10-x86-64-generic-rootfs.tar.gz
 
 jobs:
   build-image:
@@ -22,6 +21,9 @@ jobs:
         uses: docker/metadata-action@v4.0.1
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+      - name: Import OpenWRT rootfs
+        run: |
+          docker import ${{ env.OPENWRT_ROOTFS_URL }} local/openwrt-rootfs
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
