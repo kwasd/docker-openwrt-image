@@ -4,6 +4,7 @@ on: [push]
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  IMAGE_TAG: 19.07.10
   OPENWRT_ROOTFS_URL: https://archive.openwrt.org/releases/19.07.10/targets/x86/64/openwrt-19.07.10-x86-64-generic-rootfs.tar.gz
 
 jobs:
@@ -29,5 +30,5 @@ jobs:
         with:
           push: true
           file: Dockerfile
-          tags: ghcr.io/${{ env.IMAGE_NAME }}/openwrt:latest
+          tags: ghcr.io/${{ env.IMAGE_NAME }}/openwrt:${{ env.IMAGE_TAG }}
 
