@@ -1,4 +1,4 @@
-FROM library/openwrt-rootfs
+FROM local/openwrt-rootfs
 
 RUN mkdir -p /var/lock
 
